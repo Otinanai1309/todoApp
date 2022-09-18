@@ -54,6 +54,18 @@ Create the django project
 
   $ django-admin startproject backend .
 
-  
+
+Create the git repository
+
+.. code-block:: console
+  :emphasize-lines: 1
+
+  echo "# todoApp" >> README.md
+  git init
+  git add README.md
+  git commit -m "first commit"
+  git branch -M main
+  git remote add origin https://github.com/Otinanai1309/todoApp.git
+  git push -u origin main
 
 
