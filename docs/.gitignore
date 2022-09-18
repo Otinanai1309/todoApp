@@ -1,1 +1,10 @@
-docs/
+_build/
+
+_static/
+
+_templates/
+
+conf.py
+index.rst
+startproject.rst
+

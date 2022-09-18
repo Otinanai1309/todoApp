@@ -69,3 +69,15 @@ Create the git repository
   git push -u origin main
 
 
+Creating Our Backend Server
+---------------------------
+
+Now, it’s time to create the backend server! A single Django project can contain one or more apps that work
+together to power an API. Django uses the concept of projects and apps to keep code clean and readable.
+
+.. code-block:: console
+  :emphasize-lines: 1
+
+  $ python manage.py startapp todo
+
+
