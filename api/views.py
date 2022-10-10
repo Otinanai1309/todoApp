@@ -4,7 +4,9 @@ from .serializers import TodoSerializer
 from todo.models import Todo
 
 # Create your views here.
-class TodoList(generics.ListAPIView):
+class TodoListCreate(generics.ListCreateAPIView): 
+  # ListAPIView is a built-in generic class which creates a
+  # read-only endpoint for model instances.
   # ListAPIView requires two mandatory attributes, serializer_class and queryset.
   # We specify TodoSerializer which we have earlier implemented serializer_class = TodoSerializer
   serializer_class = TodoSerializer
