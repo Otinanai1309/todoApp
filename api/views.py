@@ -16,6 +16,16 @@ class TodoListCreate(generics.ListCreateAPIView):
     
     return Todo.objects.filter(user=user).order_by('-created')
   
+  def perform_created(self, serializer):
+    # serializer holds a django model
+    user = self.request.user
+    print('user =', user)
+    serializer.save(user=user) 
+    # perform_create acts as a hook which is called before the instance is created in the database. Thus, we can specify
+    # that we set the user of the todo as the request’s user before creation in the database.
+    # These hooks are particularly useful for setting attributes that are implicit in the request, but are not part of the
+    # request data. In our case, we set the todo’s user based on the request user.
+  
     """
     Code explanation
     We import DRF ’ s generics class of views.
