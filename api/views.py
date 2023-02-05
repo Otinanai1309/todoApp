@@ -50,3 +50,17 @@ class TodoRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     # user can only update, delete own posts
     
     return Todo.objects.filter(user=user)
+  
+class TodoToggleComplete(generics.UpdateAPIView):
+  serializer_class = TodoSerializer
+  permission_classes = [permissions.IsAuthenticated]
+  
+  
+  def get_queryset(self):
+    user = self.request.user
+    
+    return Todo.objects.filter(user=user)
+  
+  def perform_update(self, serializer):
+    serializer.instance.completed = not(serializer.instance.completed)
+    return serializer.save()

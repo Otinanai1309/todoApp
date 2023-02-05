@@ -28,3 +28,10 @@ class TodoSerializer(serializers.ModelSerializer):
   Additionally, we specify that created and completed fields are read only. I.e., they cannot be edited by a user
   (because they ought to be auto-populated when a todo is created and when it is marked as complete).
   """  
+  
+class TodoToggleCompleteSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Todo
+    fields = ['user'] # why need to show id?
+    read_only_fields = ['title', 'memo', 'created', 'completed']
+    
