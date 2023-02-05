@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import generics, permissions
-from .serializers import TodoSerializer
+from .serializers import TodoSerializer, TodoToggleCompleteSerializer
 from todo.models import Todo
 
 # Create your views here.
@@ -52,15 +52,19 @@ class TodoRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     return Todo.objects.filter(user=user)
   
 class TodoToggleComplete(generics.UpdateAPIView):
-  serializer_class = TodoSerializer
+  serializer_class = TodoToggleCompleteSerializer
   permission_classes = [permissions.IsAuthenticated]
   
   
   def get_queryset(self):
     user = self.request.user
+    """todoObject = Todo.objects.filter(user=user)
+    todoObject.title = self.title
+    todoObject.memo = self.memo"""
     
     return Todo.objects.filter(user=user)
   
   def perform_update(self, serializer):
+    
     serializer.instance.completed = not(serializer.instance.completed)
     return serializer.save()
