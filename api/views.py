@@ -40,3 +40,13 @@ class TodoListCreate(generics.ListCreateAPIView):
     which match the user. Additionally, we order the todos by the created date i.e. we show the latest todo first. You
     can customize get_queryset to return the set of todos that you want.
     """
+    
+class TodoRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+  serializer_class = TodoSerializer
+  permission_classes = [permissions.IsAuthenticated]
+  
+  def get_queryset(self):
+    user = self.request.user
+    # user can only update, delete own posts
+    
+    return Todo.objects.filter(user=user)
